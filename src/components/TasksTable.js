@@ -34,7 +34,7 @@ class TasksTable extends React.Component {
                 <TaskPrimaryHeadingRow />
                 <CreateTaskBar onUserInput={this.handleUserInput.bind(this)} /> 
                 <TaskSecondaryHeadingRow />
-                <TaskRow taskArray={this.state.taskArray} onComplete={this.complete.bind(this)}/>
+                <TaskRow taskArray={this.state.taskArray} />
             </div>    
         
         )

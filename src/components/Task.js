@@ -1,22 +1,24 @@
 import React from 'react'
 import Remarkable from 'remarkable'
 
-class Task extends React.Component {
+class Task extends React.Component { 
     rawMarkup= function() {
             var md = new Remarkable();
-            var rawMarkup = md.render(this.props.children.toString());
+            var rawMarkup = md.render(this.props.toString());
             return { __html: rawMarkup };
-    }
+    } 
     
     render() {
         return(
             <div className="task">
                 <h2 className="timeLeft"> 
-                    {this.props.timeLeft} Days Remaining
+                    {this.props.timeToComplete} Remaining
                 </h2> 
-                <span dangerouslySetInnerHTML={this.rawMarkup()} />  
+                <h3 className="userTask">
+                    {this.props.userTask}
+                </h3> 
                 <span>
-                    <button onClick={this.onRemove.bind(this)} className="glyphicons glyphicons-remove-sign"/>
+                    <button onClick={this.props.onRemove.bind(this)} className="glyphicons glyphicons-remove-sign"/>
                 </span>
             </div>
         );

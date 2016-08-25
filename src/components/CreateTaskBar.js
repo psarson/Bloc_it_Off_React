@@ -1,12 +1,12 @@
 import React from 'react' 
 
-//receives user input
 class CreateTaskBar extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             userTask: '',
-            timeLeft: '', 
+            timeToComplete: '', 
+            timeEntered: Date.now()
         }
     }
     
@@ -14,25 +14,29 @@ class CreateTaskBar extends React.Component {
         this.setState({userTask: event.target.value})
     } 
     
-    handleTimeLeft(event) {
-        this.setState({timeLeft: event.target.value})
-    } 
+    handleTimeToComplete(event) {
+        this.setState({timeToComplete: event.target.value})
+    }
     
+    handleTimeEntered(event) {
+        this.setState({timeEntered: event.target})
+    }
     handleSubmit(e) {
         e.preventDefault();
         var userTask = this.state.userTask.trim(); 
-        var timeLeft = this.state.timeLeft.trim(); 
-        if(!userTask || !timeLeft) {
+        var timeToComplete = Date.parse(this.state.timeToComplete); 
+        var timeEntered = Date.parse(this.state.timeEntered);
+        if(!userTask || !timeToComplete) {
             return;
-        } else if (isNaN(timeLeft)) {
+        } else if (isNaN(timeToComplete)) {
             alert("Please enter a valid number")
             return;
         } else {
             this.props.onUserInput(
-                {userTask, timeLeft}
+                {userTask, timeToComplete, timeEntered}
             )
         } 
-        this.setState({userTask: '', timeLeft: ''});
+        this.setState({userTask: '', timeToComplete: '', timeEntered: Date.now()});
     }
     
     render() {
@@ -46,11 +50,15 @@ class CreateTaskBar extends React.Component {
                 /> 
                 <input 
                     type="text"
-                    placeholder="Enter time remaining"  
-                    value={this.state.timeLeft}
-                    onChange={this.handleTimeLeft.bind(this)}
+                    placeholder="Month Day, Year"  
+                    value={this.state.timeToComplete}
+                    onChange={this.handleTimeToComplete.bind(this)}
                 />
-                <input type="submit" value="Post" />
+                <input 
+                    type="submit" 
+                    value="Post"
+                    onChange={this.handleTimeEntered.bind(this)}
+                />
             </form>
         )
     }

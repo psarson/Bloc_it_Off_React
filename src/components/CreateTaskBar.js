@@ -6,7 +6,7 @@ class CreateTaskBar extends React.Component {
         this.state = {
             userTask: '',
             timeToComplete: '', 
-            timeEntered: Date.now()
+            timeEntered: Date.now(), 
         }
     }
     
@@ -21,6 +21,7 @@ class CreateTaskBar extends React.Component {
     handleTimeEntered(event) {
         this.setState({timeEntered: event.target})
     }
+    
     handleSubmit(e) {
         e.preventDefault();
         var userTask = this.state.userTask.trim(); 
@@ -57,7 +58,7 @@ class CreateTaskBar extends React.Component {
                 <input 
                     type="submit" 
                     value="Post"
-                    onChange={this.handleTimeEntered.bind(this)}
+                    onChange={this.handleTimeEntered.bind(this)} 
                 />
             </form>
         )

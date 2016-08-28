@@ -1,17 +1,16 @@
-import React from 'react' 
-import CreateTaskBar from './CreateTaskBar' 
-import TaskRow from './TaskRow'  
-import data from './data'
+import React from 'react'; 
+import '../index.css';
+import CreateTaskBar from './CreateTaskBar'; 
+import TaskRow from './TaskRow';  
+import data from '../DataBase'; 
 
 class TasksTable extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
-            taskArray: data, 
-            completedArray: [],  
-            expiredArray: [],
-            active: false,  
-            completed: false
+            taskArray: data,
+            completedArray: [], 
+            expiredArray: []
         }
     }   
     
@@ -23,8 +22,10 @@ class TasksTable extends React.Component {
     
     remove(index){
        var newTask = this.state.taskArray.slice(); 
-       newTask.splice(index, 1); 
-       this.setState({taskArray: newTask});
+       var oldTask = this.state.completedArray;
+       var toOldTask = newTask.splice(index, 1);  
+       oldTask.push(toOldTask);
+       this.setState({taskArray: newTask, completedArray: oldTask }); 
     }  
     
     sortByAscd(index){
@@ -39,28 +40,32 @@ class TasksTable extends React.Component {
     }
     
     check(index){
+       var expiredTask = this.state.expiredArray;
        var checkedArray = this.state.taskArray.filter(function(item){
             if (item.timeToComplete < Date.now()) {
+                expiredTask.push(item);
                 return false
             } else {
                 return true
             } 
         });  
-        this.setState({taskArray: checkedArray})
+        this.setState({taskArray: checkedArray, expiredArray: expiredTask})
     }
     
-    componentWillMount() {
-        setInterval(this.check.bind(this), 1000)
+    componentWillMount() { 
+       this.interval = setInterval(this.check.bind(this), 1000) 
+    } 
+    
+    componentWillUnmount() {
+        clearInterval(this.interval)
     }
                              
     render() {
-
         return (
             <div> 
                 <CreateTaskBar onUserInput={this.handleUserInput.bind(this)}/>  
                 <div className="sortArray">
-                    <h4 onClick={this.sortByAscd.bind(this)}> Sort the Array </h4> 
-                    <h4 onClick={this.check.bind(this)}> Remove Expired </h4>
+                    <button onClick={this.sortByAscd.bind(this)}> Newest </button> 
                 </div>
                 <TaskRow taskArray={this.state.taskArray} onRemove={this.remove.bind(this)}/>  
             </div>    

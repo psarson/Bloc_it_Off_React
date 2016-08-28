@@ -3,8 +3,7 @@ import Task from './Task'
 
 
 class TaskRow extends React.Component {
-    render(){      
-                
+    render(){        
        var taskNodes = this.props.taskArray.map(function(task) { 
             return(
                 <Task timeToComplete={task.timeToComplete} 
@@ -13,7 +12,6 @@ class TaskRow extends React.Component {
                       onRemove={this.props.onRemove.bind(this)} />
             )
         }, this) 
-        
         return (
             <div className="taskRow"> 
                 {taskNodes} 

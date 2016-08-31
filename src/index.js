@@ -13,10 +13,10 @@ import './index.css';
 ReactDOM.render((
   <Router history={hashHistory}>
     <Route path="/" component={App}> 
-        <IndexRoute component={Home}></IndexRoute>       
-          <Route path="about" component={About}></Route> 
-          <Route path="completed(/:completed)" name="completed" component={Completed}></Route> 
-          <Route path="expired(/:expired)" name="expired" component={Expired}></Route>
+        <IndexRoute component={Home} />       
+        <Route path="about" component={About} /> 
+        <Route path="completed(/:completed)" name="completed" component={Completed} /> 
+        <Route path="expired(/:expired)" name="expired" component={Expired} />
     </Route>
   </Router>    
 ) ,document.getElementById('root'));

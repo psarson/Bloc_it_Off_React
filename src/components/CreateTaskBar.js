@@ -20,7 +20,7 @@ class CreateTaskBar extends React.Component {
     
     handleTimeEntered(event) {
         this.setState({timeEntered: event.target})
-    }
+    }  
     
     handleSubmit(e) {
         e.preventDefault();

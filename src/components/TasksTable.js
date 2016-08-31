@@ -2,14 +2,13 @@ import React from 'react';
 import '../index.css';
 import CreateTaskBar from './CreateTaskBar'; 
 import TaskRow from './TaskRow';  
-import data from '../DataBase'; 
 
 class TasksTable extends React.Component {
-    constructor(props) {
+    /*constructor(props) {
         super(props) 
         this.state = {
             taskArray: data,
-            completedArray: [], 
+            completed: [], 
             expiredArray: []
         }
     }   
@@ -22,10 +21,8 @@ class TasksTable extends React.Component {
     
     remove(index){
        var newTask = this.state.taskArray.slice(); 
-       var oldTask = this.state.completedArray;
-       var toOldTask = newTask.splice(index, 1);  
-       oldTask.push(toOldTask);
-       this.setState({taskArray: newTask, completedArray: oldTask }); 
+       newTask.splice(index, 1);  
+       this.setState({taskArray: newTask }); 
     }  
     
     sortByAscd(index){
@@ -37,19 +34,17 @@ class TasksTable extends React.Component {
             } 
         }) 
         this.setState({taskArray: sortedArray})
-    }
+    }  
     
     check(index){
-       var expiredTask = this.state.expiredArray;
        var checkedArray = this.state.taskArray.filter(function(item){
             if (item.timeToComplete < Date.now()) {
-                expiredTask.push(item);
                 return false
             } else {
                 return true
             } 
         });  
-        this.setState({taskArray: checkedArray, expiredArray: expiredTask})
+        this.setState({taskArray: checkedArray})
     }
     
     componentWillMount() { 
@@ -58,16 +53,16 @@ class TasksTable extends React.Component {
     
     componentWillUnmount() {
         clearInterval(this.interval)
-    }
+    }*/
                              
-    render() {
+    render() { 
         return (
             <div> 
-                <CreateTaskBar onUserInput={this.handleUserInput.bind(this)}/>  
+                <CreateTaskBar onUserInput={this.props.handleUserInput}/>  
                 <div className="sortArray">
-                    <button onClick={this.sortByAscd.bind(this)}> Newest </button> 
+                    <button onClick={this.props.sortByAscd}> Newest </button> 
                 </div>
-                <TaskRow taskArray={this.state.taskArray} onRemove={this.remove.bind(this)}/>  
+                <TaskRow taskArray={this.props.taskArray} onRemove={this.props.remove}/>  
             </div>    
         
         )

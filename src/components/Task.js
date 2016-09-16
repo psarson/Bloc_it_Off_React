@@ -9,7 +9,7 @@ class Task extends React.Component {
     } 
     
     render() {
-        console.log(this.props.val)
+        console.log("id: " + this.props.keyID)
         return(
             <div className="task">
                 <h2 className="timeLeft"> 
@@ -19,7 +19,7 @@ class Task extends React.Component {
                     {this.props.userTask}
                 </h3> 
                 <span>
-                    <button onClick={ ()=>{this.props.onRemove(this.props.val)} } className="btn btn-success"> Done </button>
+                    <button onClick={ ()=>{this.props.onRemove(this.props.keyID)} } className="btn btn-success"> Done </button>
                 </span>
             </div>
         );

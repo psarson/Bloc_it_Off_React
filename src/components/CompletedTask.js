@@ -11,7 +11,6 @@ class CompletedTask extends React.Component {
     render() {
         return(
             <div className="task">
-                {this.props.timeEntered}
                 <h3 className="userTask">
                     {this.props.userTask}
                 </h3> 

@@ -4,11 +4,10 @@ import CompletedTask from '../components/CompletedTask';
 class Completed extends React.Component { 
     
     render () {
-        var completedTaskNodes = this.props.completedArray.map(function(task) { 
+        var completedTaskNodes = this.props.completedArray.map((task) => { 
             return(
                 <CompletedTask 
-                      timeToComplete={task.timeToComplete} 
-                      key={task.timeEntered} 
+                      key={task.uniqueID}
                       userTask={task.userTask} />
             )
         }, this) 

@@ -6,7 +6,7 @@ class CreateTaskBar extends React.Component {
         this.state = {
             userTask: '',
             timeToComplete: '', 
-            timeEntered: Date.now(), 
+            uniqueID: 0 
         }
     }
     
@@ -18,15 +18,15 @@ class CreateTaskBar extends React.Component {
         this.setState({timeToComplete: event.target.value})
     }
     
-    handleTimeEntered(event) {
-        this.setState({timeEntered: event.target})
-    }  
+    handleUniqueID(event) {
+        this.setState({uniqueID: event.target})
+    } 
     
     handleSubmit(e) {
         e.preventDefault();
         var userTask = this.state.userTask.trim(); 
         var timeToComplete = Date.parse(this.state.timeToComplete); 
-        var timeEntered = Date.parse(this.state.timeEntered);
+        var uniqueID = this.state.uniqueID + Math.random();
         if(!userTask || !timeToComplete) {
             return;
         } else if (isNaN(timeToComplete)) {
@@ -34,10 +34,10 @@ class CreateTaskBar extends React.Component {
             return;
         } else {
             this.props.onUserInput(
-                {userTask, timeToComplete, timeEntered}
+                {userTask, timeToComplete, uniqueID}
             )
         } 
-        this.setState({userTask: '', timeToComplete: '', timeEntered: Date.now()});
+        this.setState({userTask: '', timeToComplete: ''});
     }
     
     render() {
@@ -54,11 +54,12 @@ class CreateTaskBar extends React.Component {
                     placeholder="Month Day, Year"  
                     value={this.state.timeToComplete}
                     onChange={this.handleTimeToComplete.bind(this)}
+                    
                 />
                 <input 
                     type="submit" 
                     value="Post"
-                    onChange={this.handleTimeEntered.bind(this)} 
+                    onChange={this.handleUniqueID.bind(this)} 
                 />
             </form>
         )

@@ -6,7 +6,7 @@ class Expired extends React.Component {
         var taskNodes = this.props.expiredArray.map(function(task) { 
             return(
                 <CompletedTask timeToComplete={task.timeToComplete} 
-                      key={task.timeEntered} 
+                      key={task.uniqueID} 
                       userTask={task.userTask} />
             )
         }, this) 

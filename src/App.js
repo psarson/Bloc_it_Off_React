@@ -1,13 +1,12 @@
 import React, { Component } from 'react';  
 import Nav from './components/Nav'
 import './App.css';   
-import data from './DataBase';
 
 class App extends Component { 
   constructor(props) {
         super(props) 
         this.state = {
-            taskArray: data,
+            taskArray: [],
             completedArray: [], 
             expiredArray: []
         }
@@ -23,12 +22,12 @@ class App extends Component {
         console.log("key ", key);
        var newTask = this.state.taskArray;
        var completedTask = newTask.find(function(task){ 
-            return task.timeEntered === key
+            return task.uniqueID === key
        });
         console.log("completedTask ", completedTask)
        var completedArray = [...this.state.completedArray, completedTask];
        var filterArray = this.state.taskArray.filter(function(task){
-           return task.timeEntered !== key
+           return task.uniqueID!== key
        })  
        this.setState({taskArray: filterArray, completedArray: completedArray}); 
     }  

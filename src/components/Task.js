@@ -8,10 +8,9 @@ class Task extends React.Component {
             return { __html: rawMarkup };
     } 
     
-    render() {
-        console.log("id: " + this.props.keyID)
+    render() { 
         return(
-            <div className="task">
+            <div className="task" >
                 <h2 className="timeLeft"> 
                     Finish by {this.props.timeToComplete} 
                 </h2> 

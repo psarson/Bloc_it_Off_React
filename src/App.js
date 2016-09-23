@@ -1,5 +1,5 @@
 import React, { Component } from 'react';  
-import Nav from './components/Nav'
+import Navigate from './components/Navigate'
 import './App.css';   
 
 class App extends Component { 
@@ -80,7 +80,7 @@ class App extends Component {
        <div> 
          <h1>Bloc it Off</h1>
             <main>
-                 <Nav />
+                 <Navigate />
                  {newChildren}
             </main>
        </div>
